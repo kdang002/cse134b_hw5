@@ -14,6 +14,10 @@
         <!-- Importing Custom Porsche fonts directly from porsche.com -->
         <link rel="preconnect" href="https://cdn.ui.porsche.com" crossorigin>
         <link rel="dns-prefetch" href="https://cdn.ui.porsche.com" crossorigin>
+        
+        <!-- Importing Masonry Layout for cards -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"></script>
+
                 
 	</head>
 
@@ -59,13 +63,30 @@
 		</header>
 
         <main>
-            <h1>Cars</h1>
-            <project-card
-                title="My Project"
-                img="resources\images\Kiet_JZG_600.jpg"
-                description="A short summary of my project."
-                link="https://google.com"
-            ></project-card>
+            <h1>Cars Collection 🏎️</h1>
+            <section class="projects-grid">
+                <project-card
+                    title="Mazda RX7 'It's stock officer'"
+                    img="resources/cars/mazda-rx7-stock.jpg"
+                    description="Triton Auto Club @ UCSD. Definitely stock; not as if it got 40% carbon fiber kit with almost no interior for weight reduction; definitely no bigger turbos nor modified exhaust."
+                    link="https://en.wikipedia.org/wiki/Mazda_RX-7"
+                ></project-card>
+
+                <project-card
+                    title="Ferrari 488 Pista"
+                    img="resources\cars\ferrari-488-pista.jpg"
+                    description="Triton Auto Club @ UCSD. Absolutely Fucking Gorgeous."
+                    link="#"
+                ></project-card>
+
+                <project-card
+                    title="Third Project"
+                    img="resources/cars/third-car.jpg"
+                    description="Yet another cool project."
+                    link="#"
+                ></project-card>
+            </section>
+
         </main>
 
         <!-- FOOTER BEGINS -->

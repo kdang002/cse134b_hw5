@@ -1,5 +1,5 @@
 window.addEventListener('DOMContentLoaded', () => {
-        function cardStyles() {
+    function cardStyles() {
         return `
             :host {
                 display: block;
@@ -15,12 +15,25 @@ window.addEventListener('DOMContentLoaded', () => {
                 border-radius: 14px;
                 overflow: hidden;
                 box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-                transition: transform 0.15s ease, box-shadow 0.15s ease;
+                transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.3s ease;
+            }
+
+            /* Dark mode styles */
+            .card.dark {
+                background: rgba(91, 78, 78, 1)
+            }
+
+            .card.dark h2 {
+                color: #ffffff;
+            }
+
+            .card.dark p {
+                color: #e5e5e5;
             }
 
             .card:hover {
-                transform: translateY(-4px);
-                box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+                transform: translateY(-5px);
+                box-shadow: 0 6px 20px rgba(165, 57, 57, 0.12);
             }
 
             picture img {
@@ -33,32 +46,26 @@ window.addEventListener('DOMContentLoaded', () => {
                 margin: 16px;
                 font-size: 1.25rem;
                 line-height: 1.3;
+                color: #000;
+                transition: color 0.3s ease;
             }
 
             p {
-                margin: 0 16px 16px 16px;
+                margin: 16px;
                 line-height: 1.55;
                 color: #444;
                 font-size: 0.95rem;
+                transition: color 0.3s ease;
             }
 
             a {
                 display: inline-block;
                 margin: 0 16px 20px 16px;
                 padding: 10px 14px;
-                background: #0073ff;
-                color: white;
                 text-decoration: none;
-                border-radius: 8px;
-                font-weight: 500;
-                text-align: center;
-                transition: background 0.15s ease;
             }
 
-            a:hover {
-                background: #005ad1;
-            }
-
+            // RESPONSIVE DESIGN for mobile devices 
             @media (max-width: 480px) {
                 h2 {
                     font-size: 1.15rem;
@@ -72,69 +79,71 @@ window.addEventListener('DOMContentLoaded', () => {
 
     
     class project_card extends HTMLElement {
-
         constructor() {
             super();
             this.attachShadow({ mode: 'open' });
         }
 
-        // Automatically renders into the DOM
         connectedCallback() {
             this.render();
+            this.observeDarkMode();
         }
 
-        cardStyles() {
-            return `
-                :host {
-                    display: block;
-                    max-width: 350px;
-                    width: 100%;
-                    font-family: system-ui, sans-serif;
+        observeDarkMode() {
+            const card = this.shadowRoot.querySelector('.card');
+            
+            // Check initial dark mode state
+            const updateDarkMode = () => {
+                if (document.body.classList.contains('dark')) {
+                    card.classList.add('dark');
+                } else {
+                    card.classList.remove('dark');
                 }
+            };
 
-                .card {
-                    display: flex;
-                    flex-direction: column;
-                    background: white;
-                    border-radius: 14px;
-                    overflow: hidden;
-                    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-                    transition: transform 0.15s ease, box-shadow 0.15s ease;
-                }
+            // Initial check
+            updateDarkMode();
 
-                .card:hover {
-                    transform: translateY(-4px);
-                    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-                }
+            // Watch for changes to body's class
+            const observer = new MutationObserver(updateDarkMode);
+            observer.observe(document.body, { 
+                attributes: true, 
+                attributeFilter: ['class'] 
+            });
 
-                /* more styles ... */
-            `;
+            // Store observer so it can be cleaned up if needed
+            this._darkModeObserver = observer;
         }
 
+        disconnectedCallback() {
+            // Clean up observer when element is removed
+            if (this._darkModeObserver) {
+                this._darkModeObserver.disconnect();
+            }
+        }
 
         render() {
-            // Getters
             const title = this.getAttribute('title') || 'Project Title';
             const imgSrc = this.getAttribute('img') || '';
             const description = this.getAttribute('description') || 'Project description goes here.';
             const link = this.getAttribute('link') || '#';
 
-            // Generate HTML
             this.shadowRoot.innerHTML = `
                 <style>${cardStyles()}</style>
 
                 <div class="card">
-                    <picture>
-                        <img src="${imgSrc}" alt="${title}">
-                    </picture>
+                    
 
-                    <h2>${title}</h2>
-                    <p>${description}</p>
-                    <a href="${link}">Learn More</a>
+                    <a href="${link}">
+                        <h2>${title}</h2>
+                        <picture>
+                            <img src="${imgSrc}" alt="${title}">
+                        </picture>                    
+                        <p>${description}</p>
+                    </a>
                 </div>
             `;
         }
-
     }
 
     // Register the class as a custom HTML Element
