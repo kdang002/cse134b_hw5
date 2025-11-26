@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+
+    <!-- HEAD BEGINS -->
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+
+		<title>CSE 134B - VyDang</title>
+        <link rel="stylesheet" href="main.css" media="screen">
+
+        <!-- Importing Custom Porsche fonts directly from porsche.com -->
+        <link rel="preconnect" href="https://cdn.ui.porsche.com" crossorigin>
+        <link rel="dns-prefetch" href="https://cdn.ui.porsche.com" crossorigin>
+
+	</head>
+    <!-- HEAD ENDS -->
+
+    <!-- BODY BEGINS -->
+	<body>
+		<header class="navbar">
+            <!-- Pure CSS Hamburger Menu (Mobile Only) -->
+            <input type="checkbox" id="menu-toggle" aria-label="Toggle mobile menu">
+            <label for="menu-toggle" class="hamburger-label" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <!-- Desktop Dropdown Menu -->
+            <nav class="dropdown">
+                <button type="button" class="dropbtn">Menu</button>
+                <section class="dropdown-content">
+                    <a href="index.html">Home</a>
+                    <a aria-disabled="true">More to Come :D</a>
+
+                </section>
+            </nav>
+
+            <a href="index.html" class="logo-link">
+                <h1 class="logo">Vy Kiet Dang</h1>
+            </a>
+
+            <!-- Dark Light Mode -->
+            <section class="theme-switch-wrapper">
+                <label class="theme-switch">
+                    <input type="checkbox" id="theme-toggle">
+                    <span class="slider"></span>
+                </label>
+                <span class="theme-label">Dark Mode</span>
+            </section>
+
+            <!-- Mobile Menu (Controlled by CSS) -->
+            <nav class="mobile-menu">
+                <a href="index.html">Home</a>
+                <a aria-disabled="true">More to Come :D</a>
+            </nav>
+		</header>
+
+        <!-- MAIN BEGINS -->
+		<main>
+              <h2>About MEEEEEEEEEEEEE!!!!!!!!!!!!!!!!!!!!!!!!!</h2>
+
+			<section class="about-me" id="about-me">
+                <div class="two-row-layout">
+                        <picture> 
+                            <source srcset="resources\images\Kiet_JZG_600.jpg 600w , resources\images\KietAndHisFriends_1024.jpg 1024w" , media="(min-width: 1025px)" alt="Kiet (the middle left by the window) and his friends">
+                            <img    width="600" alt="Kiet at Jiu Zhai Gou " src="resources\images\Kiet_JZG_600.jpg">
+                        </picture>
+                        <p> 
+                            Kiet spent 3 years at Pasadena City College before transferring to <strong>UC San Diego</strong>, 
+                            majoring in <strong>Computer Science</strong>. 
+                            Kiet has always been amazed of <b>Robotics</b> technology, 
+                            especially application in the field of transportations. 
+                            Ever since moving to San Diego for college, 
+                            Kiet has fall in love with this place, and is hunting for j*bs 
+                            in order to stay with the warm sand and cold ocean. <br>
+                            He's also obsessed with <em>Beige and Rounded corners.</em> <br>
+                            Haven't mentioned, <strong>Kiet extremely loves cars and anything that could potentially injured him at highspeed</strong>.
+                        </p>
+                </div>
+            </section>
+            
+            <hr>
+            
+			<section class="wrapper" >
+                <div class="two-column-layout">
+                    <ul>
+                        <li>GOAL</li>
+                        <li>Landing a j*b after college, preferably into automotive industry.</li>
+                        <li>Get a Master Degree in the same field.</li>
+                        <li>Supports my 2 younger sister's financially.</li>
+                        <li>Become a College Instructor at one point and have my own startup.</li>
+                    </ul>
+
+                    <ul>
+                        <li>FRUSTRATION</li>
+                        <li>J*b market.</li>
+                        <li>Home is a hemisphere away.</li>
+                        <li>College professor is a professional yapper.</li>
+                        <li>Overcooked Steak but Undercook Chicken.</li>
+                        <li>UC San Diego parking situations.</li>
+                        <li>Too broke for expensive hobbies.</li>
+                    </ul>
+                </div>
+			</section> 
+            
+            <hr>
+
+            <section class="wrapper">
+                <div class="two-column-layout">
+                <span>
+                    <article>
+                            <h3>My All-Time Favorite Movie Article</h3>
+                            <a href="https://youtu.be/uYPbbksJxIg">
+                                <h4>Oppenheimer - Directed by Christopher Nolan (YouTube Trailer)</h4>
+                            </a>
+                            <picture>
+                                <source srcset="resources\images\oppenheimer_600.jpg 600w" alt="Oppenheimer Poster">
+                                <img    width="600" alt="Oppenheimer Poster" src="resources\images\oppenheimer_600.jpg">
+                            </picture>
+                    </article>	
+                </span>
+
+                <span>
+                    <review-box>
+                        <form action="https://httpbin.org/post" method="post">
+                            <fieldset>
+                                <legend>Movie Feedback</legend>
+
+                                <p>
+                                <span>Have you seen the movie?</span><br>
+                                <label><input type="radio" name="seen" value="yes" id="seen-yes">Yes</label>
+                                <label><input type="radio" name="seen" value="no" id="seen-yes">No</label>                           
+                                </p>
+
+                                <p>
+                                <label for="opinion">If so, what do you think of it?</label><br>
+                                <textarea id="opinion" name="opinion" rows="5" cols="40" placeholder="Share your thoughts..."></textarea>
+                                </p>
+
+                                <!-- Disable due to having no backend DB -->
+                                <p>
+                                <button type="submit" value="Submit">Submit</button>
+                                </p>
+                            </fieldset>
+                        </form>
+                    </review-box>
+
+                </span>
+                
+                </div>
+            </section>
+
+            
+            <button type="button" class="blow-up"
+            onclick="alert('MACHINE WILL SELF DESTRUCT IN 5 SECONDS.');">Try me UwU</button>
+            <hr>
+            
+            <!-- === Custom Element #2 usage === -->
+            <hello-world>
+            </hello-world>
+            <!-- === Custom Element #2 definition (JS allowed here) === -->
+            <script>
+                class HelloWorld extends HTMLElement {
+                constructor() {
+                    super();
+                    console.log("(￣y▽￣)╭ Ohohoho.....");
+                    }
+                }
+                customElements.define('hello-world', HelloWorld);
+            </script>
+
+
+
+		</main>
+        <!-- MAIN ENDS -->
+
+
+        <!-- FOOTER BEGINS -->
+		<footer>
+			<div>
+                <p>&copy; <span id="year"></span> Vy Kiet Dang. All rights reserved.</p>
+			</div>
+		</footer>
+        <!-- FOOTER ENDS -->
+
+        <!-- JAVA SCRIPT LINKED -->
+        <script src="darkmode.js"></script>
+
+		<!-- JS Disable fail safe, learned it the hard way from 110 -->
+        <noscript>
+            <p>Hi, you are having your JavaScript turn off. This will affect some components of the website.</p>
+        </noscript>
+
+	</body>
+    <!-- BODY ENDS -->
+
+</html>
+

@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+
+    <!-- HEAD BEGINS -->
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+		<title>CSE 134B - VyDang</title>
+
+        <link rel="stylesheet" href="main.css" media="screen">
+        <link rel="icon" type="image/x-icon" href="resources\images\vkd.ico">
+
+        <!-- Importing Custom Porsche fonts directly from porsche.com -->
+        <link rel="preconnect" href="https://cdn.ui.porsche.com" crossorigin>
+        <link rel="dns-prefetch" href="https://cdn.ui.porsche.com" crossorigin>
+                
+	</head>
+
+    <body>
+		<header class="navbar">
+            <!-- Pure CSS Hamburger Menu (Mobile Only) -->
+            <input type="checkbox" id="menu-toggle" aria-label="Toggle mobile menu">
+            <label for="menu-toggle" class="hamburger-label" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <!-- Desktop Dropdown Menu -->
+            <nav class="dropdown">
+                <button type="button" class="dropbtn">Menu</button>
+                <section class="dropdown-content">
+                    <a href="about-me.html">About Me</a>
+                    <a aria-disabled="true">More to Come :D</a>
+                </section>
+            </nav>
+
+            <a href="index.html" class="logo-link">
+                <h1 class="logo">Vy Kiet Dang</h1>
+            </a>
+
+            <!-- Dark Light Mode -->
+            <section class="theme-switch-wrapper">
+                <label class="theme-switch">
+                    <input type="checkbox" id="theme-toggle">
+                    <span class="slider"></span>
+                </label>
+                <span class="theme-label">Dark Mode</span>
+            </section>
+
+            <!-- Mobile Menu (Controlled by CSS) -->
+            <nav class="mobile-menu">
+                <a href="about-me.html">About Me</a>
+                <a aria-disabled="true">More to Come :D</a>
+            </nav>
+		</header>
+        
+        <main>
+            <h2> Greetings, welcome to the landing page of my personal website.</h2>
+            <p> My name is <strong>Kiet</strong>, and I built this site to for one of my class project, and for fun.</p>
+
+            <section class="wrapper" id="this-is-kiet">
+                <div class="two-column-layout">                    
+                    <span>
+                        <h3>This is me</h3>
+                        <p> 
+                            I enjoy doing random stuffs at random times since my attention span is weird. <br>
+                            But anyway, feel free to navigates around and click on random stuffs. <br>
+                            I promised <strong>I WILL NOT <em>BLOW UP &nbsp; </em> YOUR COMPUTER 💩</strong> <br>
+                            I'm still working on a couple more webpages like "Hobby" and "My Resume" :D , so stay tune.
+                        </p>
+
+                        <button popovertarget="my-popover" class="blow-up"> Click this Popover </button>
+                        <div id="my-popover" popover>
+                            <p><strong>YOUR DEVICE HAS BEEN COMPROMISED AND WILL SELF DESTRUCT IN 5 SECONDS.</strong></p>
+                        </div>
+
+                    </span>
+
+                    <figure>
+                        <picture> 
+                            <source srcset ="resources\images\Kiet_Pink_600.jpg 600w, resources\images\Kiet_Lake_1024.jpg 1024w" media="(min-width: 1025px)" alt="Kiet the J*bless">
+                            <img    width="600" alt="Pink Kiet" src="resources\images\Kiet_Pink_600.jpg">
+                        </picture>
+                        <figcaption>Kiet at Jiu Zhai Gou</figcaption>
+                    </figure>
+                </div>
+            </section>
+
+            <!-- === Custom Element #2 usage & definition (JS allowed here) BEGINS === -->
+            <hello-world>
+            </hello-world>
+            <script>
+                class HelloWorld extends HTMLElement {
+                constructor() {
+                    super();
+                    console.log("Hi USER!!!!!!\n☆*: .｡. o(≧▽≦)o .｡.:*☆");
+                    }
+                }
+                customElements.define('hello-world', HelloWorld);
+            </script>
+            <!-- === Custom Element #2 usage & definition (JS allowed here) ENDS === -->
+
+        </main>
+
+        <!-- FOOTER BEGINS -->
+		<footer>
+			<div>
+                <p>&copy; <span id="year"></span> Vy Kiet Dang. All rights reserved.</p>
+			</div>
+		</footer>
+        <!-- FOOTER ENDS -->
+
+        <!-- JAVA SCRIPT LINKED -->
+        <script src="darkmode.js"></script>
+
+		<!-- JS Disable fail safe, learned it the hard way from 110 -->
+        <noscript>
+            <p>Hi, you are having your JavaScript turn off. This will affect some components of the website.</p>
+        </noscript>
+
+
+    </body>
+</html>

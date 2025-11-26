@@ -1,0 +1,941 @@
+@import url("https://cdn.ui.porsche.com/porsche-design-system/styles/font-face.7076ba0.css");
+
+/* ======================================================
+    GLOBAL STYLES
+====================================================== */
+:root {
+    --bg-color: beige;
+    --text-color: black;
+    --nav-bg: rgb(199, 199, 60);
+    --menu-bg: #f1f1f1;
+    --menu-hover: #ddd;
+    --menu-active: #ccc;
+    --main-border-radius: 15px;
+    --strong-color: red;
+}
+
+/* View Transition API, allow for smooth page transition */
+@view-transition {
+    navigation: auto;
+}
+
+/* Dark mode overrides */
+.dark {
+    --bg-color: #2d2929;
+    --text-color: #ffffff;
+    --nav-bg: #92a156;
+    --menu-bg: #1e1e1e;
+    --menu-hover: #333;
+    --menu-active: #555;
+}
+#theme-toggle {
+    display: none; /* Hide the original button */
+}
+
+/* Switch Container */
+.theme-switch-wrapper {
+    order: 3;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+/* Switch Label (clickable area) */
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    cursor: pointer;
+}
+
+/* The slider (background track) */
+.theme-switch .slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 30px;
+    transition: background-color 0.3s ease;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* The circle/knob that slides */
+.theme-switch .slider::before {
+    content: "☀️";
+    position: absolute;
+    height: 24px;
+    width: 24px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* When checked (dark mode active) */
+.theme-switch input:checked + .slider {
+    background-color: #4a5568;
+}
+
+.theme-switch input:checked + .slider::before {
+    content: "🌙";
+    transform: translateX(30px);
+}
+
+/* Hover effect */
+.theme-switch:hover .slider {
+    opacity: 0.9;
+}
+
+/* Hide the checkbox input */
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Optional: Add text label */
+.theme-label {
+    color: white;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    display: none; /* Hidden by default, show on larger screens */
+}
+
+
+* {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Porsche Next', Arial, sans-serif;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+html, body {
+    height: 100dvh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    animation: slideDown 0.7s ease-in-out;
+}
+
+body {
+    margin: 0;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+p > b, strong, em {
+    color: var(--strong-color, red);
+}
+
+/* ===========================
+    ANIMATION
+=========================== */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===========================
+    NAVBAR - DESKTOP DEFAULT
+=========================== */
+.navbar {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: white;
+    z-index: 1000;
+    padding: 0.75rem 1rem;
+    box-sizing: border-box;
+    gap: 1rem;
+}
+
+/* ===========================
+    CSS HAMBURGER MENU 
+    FOR MOBILE DEVICES
+=========================== */
+/* Hide the checkbox */
+#menu-toggle {
+    display: none;
+}
+
+/* Hamburger Icon Container (hidden by default) */
+.hamburger-label {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 10px;
+    background-color: rgb(199, 199, 60);
+    border: none;
+    border-radius: 5px;
+    min-width: 44px;
+    min-height: 44px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Hamburger Lines */
+.hamburger-label span {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+/* Animate hamburger to X when checked */
+#menu-toggle:checked + .hamburger-label span:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+}
+
+#menu-toggle:checked + .hamburger-label span:nth-child(2) {
+    opacity: 0;
+}
+
+#menu-toggle:checked + .hamburger-label span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* Mobile Menu (hidden by default) */
+.mobile-menu {
+    display: none;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: #f1f1f1 !important;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 999;
+}
+
+/* Show mobile menu when checkbox is checked */
+#menu-toggle:checked ~ .mobile-menu {
+    display: block;
+    animation: slideDown 0.3s ease;
+}
+
+.mobile-menu a {
+    color: black; /* Force dark text */
+    padding: 20px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 18px;
+    border-bottom: 1px solid #ddd;
+    min-height: 44px;
+    transition: background-color 0.2s ease;
+}
+
+.mobile-menu a:hover {
+    background-color: #ddd !important;
+}
+
+.mobile-menu a:active {
+    background-color: #ccc !important;
+}
+
+/* Dark Mode - Override for mobile menu */
+.dark .mobile-menu {
+    background-color: #2a2a2a !important; /* Dark mobile menu background */
+    border-top: 1px solid #444;
+}
+
+.dark .mobile-menu a {
+    color: #e5e5e5 !important; /* Light text in dark mode */
+    background-color: #877943 !important;
+    border-bottom: 1px solid #444;
+}
+
+.dark .mobile-menu a:hover {
+    background-color: #3a3a3a !important; /* Slightly lighter on hover */
+}
+
+.dark .mobile-menu a:active {
+    background-color: #4a4a4a !important; /* Even lighter when active */
+}
+
+/* Desktop Menu */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: color-mix(in srgb, rgb(199, 199, 60) 70%, white);
+    background-color: rgb(199, 199, 60); /* Fallback */
+    color: white;
+    padding: 16px 24px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    min-width: 44px;
+    min-height: 44px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1 !important;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black !important;
+    padding: 16px;
+    text-decoration: none;
+    display: block;
+    min-height: 44px;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd !important;
+}
+
+.dropdown-content a:active {
+    background-color: #ccc !important;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #d4c27a !important;
+}
+
+/* Dark Mode - Override for dropdown */
+.dark .dropdown-content {
+    background-color: #2a2a2a !important; /* Dark dropdown background */
+    border: 1px solid #444;
+}
+
+.dark .dropdown-content a {
+    color: #e5e5e5 !important; /* Light text in dark mode */
+    background-color: #877943 !important;
+}
+
+.dark .dropdown-content a:hover {
+    background-color: #3a3a3a !important; /* Slightly lighter on hover */
+}
+
+.dark .dropdown-content a:active {
+    background-color: #4a4a4a !important; /* Even lighter when active */
+}
+
+/* LOGO */
+.logo-link {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Desktop Logo */
+.logo {
+    color: white;
+    font-weight: bold;
+    -webkit-text-stroke: 1px black;
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+
+/* ===========================
+    WRAPPER & LAYOUTS
+=========================== */
+.wrapper {
+    display: flex;           /* Flexbox for better centering */
+    justify-content: center; /* Horizontally center */
+    align-items: center;     /* Vertically center */
+    margin: 0 auto;          /* Equal margins on both sides */
+    padding: 1rem;           /* Equal padding all around */
+}
+
+main {
+    padding: 1rem;
+    margin-top: 40px;
+
+    & h2 {
+        text-align: center;
+    }
+
+    & > p {
+        text-align: center;
+    }
+}
+
+fieldset > legend {
+        background-color: black;
+        color: white;
+        padding: 3px 6px;
+}
+
+
+.two-column-layout {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border: solid;
+    border-radius: var(--main-border-radius, 15px);
+    padding: 1rem;
+    width: 100%;
+    max-width: 100%;
+    column-gap: 2rem;
+    row-gap: 1rem;
+    overflow: hidden;  /* Clips anything trying to escape */
+    transition: transform 500ms ease;  /* Transition on element */
+
+    & ol > li:first-child , 
+      ul > li:first-child {
+        list-style: none;
+        font-weight: bold;
+        font-size: 1.2em;
+        text-align: center;
+        border-bottom: 2px solid;
+        width: 100%; 
+        margin: 0 0 0.5rem 0; 
+        padding-bottom: 0.25rem;
+        display: block; 
+    }
+
+    & article {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    /* Responsive Images */
+    & img, 
+    & picture img {
+        content-visibility: auto;
+        max-width: 100%;
+        height: auto;
+        object-fit: cover;       
+        object-position: center;
+    }
+
+    & figure {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    & figcaption {
+        margin-top: 0.5rem;
+        font-style: italic;
+    }
+
+
+    /* ===========================
+    TEXT WRAP FOR LONG HEADINGS
+    =========================== */
+    & h3, h4 {
+        word-wrap: break-word;
+        overflow-wrap: anywhere;
+        text-align: center;
+        line-height: 1.3;
+    }
+
+}
+
+.two-column-layout:hover  {
+    transform: scale(1.05);
+}
+
+.about-me {
+    display: flex;
+    max-inline-size: 750px;
+    margin-inline: auto;
+}
+
+.two-row-layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: auto;
+    padding: 1rem;
+    border: solid;
+    border-radius: var(--main-border-radius, 15px);
+
+    & img, 
+    & picture img {
+        content-visibility: auto;
+        max-width: 100%;
+        height: auto;
+        object-fit: cover;       
+        object-position: center;
+    }
+
+}
+
+#this-is-kiet {
+    align-content: center;
+}
+
+/* Buttons */
+.blow-up {
+    padding: 15px 25px;
+    font-size: 24px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: red;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+    min-width: 44px;
+    min-height: 44px;
+    margin: auto;
+    display: grid;
+
+}
+
+button:hover {
+    background-color: rgb(213, 167, 73);
+}
+
+.blow-up:active {
+    background-color: black;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+/* ===========================
+    REVIEW BOX
+=========================== */
+review-box {
+    content-visibility: auto;
+    display: block;
+    border: 2px solid #333;
+    border-radius: 12px;
+    padding: 1em;
+    margin: 1.5em 0;
+    background-color: #f9f9f9;
+    width: 100%;
+    box-sizing: border-box;
+
+    & h2 {
+        margin-top: 0;
+    }
+
+    & p {
+        margin-bottom: 1em;
+    }
+}
+
+/* ===========================
+    FORM
+=========================== */
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background: #fff;
+    padding: 0.5rem;
+    border-radius: 6px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+
+    label {
+        display: block;
+        font-weight: 300;
+        margin-bottom: 0.25rem;
+    }
+
+
+    textarea {
+        border-color: #ccc;
+    }
+
+
+    fieldset {
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        padding: 1rem;
+    }
+
+
+    input, textarea, select, button {
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        font-size: 1rem;
+    }
+
+    /* Highlight input INVALIDATION */
+    input:invalid, select:invalid {
+        border: 2px solid #dc2626; 
+        box-shadow: 0 0 5px rgba(220, 38, 38, 0.6); 
+        border-width: 2px;
+    }
+
+    /* Highlight input VALIDATION */
+    input:valid, select:valid {
+        border: 2px solid #16a34a;
+        box-shadow: 0 0 5px rgba(22, 163, 74, 0.4);
+        border-width: 2px;
+    }
+
+    button {
+        background-color: #2563eb;
+        color: #fff;
+        padding: 0.6rem 1.2rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 500;
+        transition: background-color 0.2s ease;
+    }
+
+    button:hover,
+    button:focus-visible {
+        background-color: #1e40af;
+    }
+
+    /* Buttons */
+    .button-group {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    output {
+        display: block;
+        font-size: 0.9rem;
+        margin-top: 0.25rem;
+    }
+
+    #info {
+        color: #16a34a;
+    }
+
+    /* Focus styles (keyboard navigation) */
+    input:focus, textarea:focus,
+    select:focus, button:focus {
+        outline: 3px solid #2563eb;
+        outline-offset: 2px;
+    }
+
+    /* Outputs */
+    .error {
+        color: #b91c1c;
+        font-size: 0.9rem;
+    }
+
+    .info {
+        color: #15803d;
+        font-size: 0.9rem;
+    }    
+
+    /* Flash animation for illegal input */
+    @keyframes flash {
+      0% { background-color: #f8d7da; }
+      100% { background-color: white; }
+    }
+    
+    .flash {
+      animation: flash 0.5s;
+    }
+    
+    .error {
+      color: red;
+      font-size: 0.9em;
+      opacity: 1;
+      transition: opacity 1s ease;
+    }
+    
+    .fade-out {
+      opacity: 0;
+    }
+
+
+    /* Character counter styles */
+    #comment-info {
+        display: block;
+        font-size: 0.9rem;
+        margin-top: 0.25rem;
+        color: #16a34a; /* green by default */
+        transition: color 0.3s ease;
+    }
+
+    #comment-info.error {
+        color: #dc2626; /* red for over limit */
+    }
+
+    /* Optional field highlight for visual feedback */
+    textarea.error {
+        border: 2px solid #dc2626;
+        box-shadow: 0 0 5px rgba(220, 38, 38, 0.6);
+    }
+
+}
+
+
+/* ===========================
+    MODERN CSS :has() and <pop-over>
+=========================== */
+
+/* Select the <form> that specifically 
+    :has input:invalid and textarea:invalid, 
+    and style that <form> */
+form:has(input:invalid, textarea:invalid) {
+    border: 2px solid red;
+    background-color: color(srgb 100% 95.7% 95.7%);
+    background-color: #fff4f4;
+}
+
+/* Select the .dropdown that specifically 
+    :has .dropdown-content:hover and .dropbtn.
+    Function: highlight them whenever hovered over the dropdown content */
+.dropdown:has(.dropdown-content:hover) .dropbtn {
+    background-color: color(srgb 98.0% 72.2% 30.2%);
+    background-color: #c7b84d;
+    transition: background-color 0.3s ease;
+}
+
+/* Select the <review-box> that specifically 
+    :has textarea:focus.
+    Function: adds a green glow effect when the <textarea> inside it is focused */
+review-box:has(textarea:focus) {
+    box-shadow: 0 0 30px rgba(0, 128, 0, 0.3);
+    transition: box-shadow 0.3s ease;
+}
+
+/* Disable the user from scrolling as a prank */
+body:has(#my-popover:popover-open) {
+    overflow: hidden;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 3rem;
+}
+
+/* ======================================================
+    MOBILE RESPONSIVE (0-600px)
+====================================================== */
+@media screen and (max-width: 600px) {
+    /* Show Hamburger, Hide Desktop Menu */
+    .hamburger-label {
+        display: flex;
+    }
+
+    .dropdown {
+        display: none;
+    }
+
+    /* Mobile Navigation */
+    .navbar {
+        justify-content: space-between;
+        padding: 0.5rem 1rem;
+    }
+
+    .logo {
+        position: static; /* Remove absolute positioning */
+        transform: none; /* Remove transform */
+        order: 2;
+        font-size: 1.5rem;
+        text-align: center;
+        flex: 1;
+        padding: 0 0.5rem;
+    }
+    .logo-link {
+        position: static;
+        transform: none;
+        order: 2;
+        flex: 1;
+        text-align: center;
+        padding: 0;
+        margin: 0 0.5rem;
+    }
+
+
+      /* Theme Toggle Button */
+    #theme-toggle {
+        order: 3;
+        padding: 0.4rem 0.6rem;
+        font-size: 0.8rem;
+    }
+
+
+    /* Single Column Layout */
+    .wrapper .two-column-layout {
+        grid-template-columns: 1fr;
+    }
+
+    /* Ensure list headers are centered on mobile */
+    .two-column-layout ol > li:first-child,
+    .two-column-layout ul > li:first-child {
+        text-align: center;
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+
+    .two-column-layout:has(:only-child) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        max-width: 600px;
+        margin-inline: auto;
+        padding: 1.5rem;
+        gap: 1rem;
+    }
+
+    iframe {
+        max-width: 100%;
+        height: auto;
+    }
+
+    main {
+        margin-top: 60px;
+    }
+
+    main h2 {
+        font-size: 1.5rem;
+    }
+
+    .two-row-layout {
+    padding: 1.5rem 1rem;
+    border-style: none;  /* Remove border on small screens */
+    }
+
+    .two-row-layout img {
+        max-width: 100%;
+        width: 100%;  /* Full width on mobile */
+    }
+}
+
+/* ======================================================
+    TABLET RESPONSIVE (601px - 1024px)
+====================================================== */
+@media screen and (min-width: 601px) and (max-width: 1024px) {
+    p { 
+        font-size: 1.2rem;
+    }
+
+    li {
+        font-size: 1.1rem;
+    }
+    
+    .wrapper {
+        max-width: 90%;
+        padding-inline: 2rem;
+    }
+
+    .two-column-layout {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 100%;
+        margin-inline: auto;
+        gap: 1.5rem;
+    }
+
+    .logo {
+        font-size: 1.8rem;
+    }
+
+    main h2 {
+        font-size: 2rem;
+    }
+
+    /* Touch-friendly spacing for tablets */
+    .dropdown-content a {
+        padding: 18px;
+        min-height: 50px;
+    }
+
+    .dropbtn {
+        padding: 18px 26px;
+        min-height: 50px;
+    }
+
+    .about-me {
+        max-width: 90%;  /* Use more screen space */
+    }
+
+    .two-row-layout img {
+        max-width: 80%;  /* Slightly constrained */
+    }
+
+}
+
+/* ======================================================
+    DESKTOP RESPONSIVE (1025px+)
+====================================================== */
+@media screen and (min-width: 1025px) {
+    .wrapper {
+        max-width: 1200px;
+    }
+
+    .two-column-layout {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 1000px;
+        margin-inline: auto;
+        gap: 3rem;
+    }
+
+    .logo {
+        font-size: 2rem;
+    }
+
+    main {
+        margin-top: 100px;
+
+        & h2 {
+            font-size: 2.5rem;
+        }
+
+        & > p {
+            font-size: 1.2rem;
+        }
+    }
+
+    .two-row-layout {
+        max-width: 1000px;
+        padding: 2rem;
+
+        & img {
+            max-width: 600px;  /* Prevent huge images */
+        }
+
+        & p {
+            font-size: 1.1rem;  /* Larger, easier to read */
+        }
+    }   
+}
