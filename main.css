@@ -89,6 +89,7 @@
 .theme-switch input:checked + .slider::before {
     content: "🌙";
     transform: translateX(30px);
+    transition: transform 0.7s ease, background-color 0.3s ease;
 }
 
 /* Hover effect */
