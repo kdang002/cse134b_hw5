@@ -1,74 +1,94 @@
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
+    console.log('Data loader script running...');
+    
+    await customElements.whenDefined('project-card');
+    console.log('project-card element is defined');
+    
     const loadLocalBtn = document.getElementById('load-local');
     const loadRemoteBtn = document.getElementById('load-remote');
     const container = document.getElementById('projects-container');
     
-    // Replace with YOUR JSONBin URL or My JSON Server URL
-    const REMOTE_URL = 'https://api.jsonbin.io/v3/qs/6927eba143b1c97be9c7de87';
+    if (!loadLocalBtn || !loadRemoteBtn || !container) {
+        console.error('ERROR: Could not find required elements!');
+        return;
+    }
     
-    // Sample local data - this will be stored in localStorage
+    // UPDATE THIS with YOUR GitHub username and repo name
+    const REMOTE_URL = 'https://my-json-server.typicode.com/kdang002/cse134b-car-data/projects';
+    
+    let masonryInstance = null;
+    
     const localData = [
         {
-            title: "Honda NSX",
-            img: "resources/cars/honda-nsx.jpg",
-            description: "The Honda NSX, a supercar developed with input from legendary F1 driver Ayrton Senna.",
-            link: "https://en.wikipedia.org/wiki/Honda_NSX"
+            title: "Lamboghini Aventador S",
+            img: "resources/cars/lambo-aventador-s.jpg",
+            description: "Batman's roller.",
+            link: "#"
         },
         {
-            title: "Subaru WRX STI",
-            img: "resources/cars/wrx-sti.jpg",
-            description: "Rally-bred performance with the iconic boxer engine and symmetrical AWD system.",
-            link: "https://en.wikipedia.org/wiki/Subaru_Impreza_WRX_STI"
+            title: "Aston Martin DBS",
+            img: "resources/cars/am-dbs.jpg",
+            description: "Performance Family SUV??!",
+            link: "#"
         }
     ];
     
-    // Initialize localStorage with sample data on first load
     if (!localStorage.getItem('projectCards')) {
         localStorage.setItem('projectCards', JSON.stringify(localData));
     }
     
-    // Function to clear existing cards
     function clearCards() {
+        if (masonryInstance) {
+            masonryInstance.destroy();
+            masonryInstance = null;
+        }
         container.innerHTML = '';
     }
     
-    // Function to render cards from data array
+    function initMasonryLayout() {
+        if (window.innerWidth > 600 && typeof Masonry !== 'undefined') {
+            if (masonryInstance) {
+                masonryInstance.destroy();
+            }
+            
+            masonryInstance = new Masonry(container, {
+                itemSelector: 'project-card',
+                percentPosition: true,
+                gutter: 24,
+                horizontalOrder: true
+            });
+            
+            setTimeout(() => {
+                if (masonryInstance) {
+                    masonryInstance.layout();
+                }
+            }, 500);
+        }
+    }
+    
     function renderCards(dataArray) {
         clearCards();
         
-        const appended = [];
         dataArray.forEach(cardData => {
             const card = document.createElement('project-card');
-            // add a DOM class so Masonry can select items via a class selector
-            card.classList.add('project-card');
             card.setAttribute('title', cardData.title);
             card.setAttribute('img', cardData.img);
             card.setAttribute('description', cardData.description);
             card.setAttribute('link', cardData.link);
             container.appendChild(card);
-            appended.push(card);
         });
-
-        // Use the optimized Masonry append helper if available.
-        // This calls Masonry.appended(items) which is more efficient than reload.
+        
         setTimeout(() => {
-            if (window.appendMasonryItems) {
-                window.appendMasonryItems(appended);
-            } else if (window.initMasonry) {
-                // fallback: ensure Masonry is initialized and layout runs
-                window.initMasonry();
-            }
+            initMasonryLayout();
         }, 200);
     }
     
-    // Load from localStorage
     loadLocalBtn.addEventListener('click', () => {
         try {
             const storedData = localStorage.getItem('projectCards');
             if (storedData) {
                 const data = JSON.parse(storedData);
                 renderCards(data);
-                console.log('Loaded from localStorage:', data);
             } else {
                 alert('No local data found!');
             }
@@ -78,25 +98,22 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
     
-    // Load from remote server
     loadRemoteBtn.addEventListener('click', async () => {
         try {
             loadRemoteBtn.textContent = 'Loading...';
             loadRemoteBtn.disabled = true;
             
+            // NO API KEY NEEDED!
             const response = await fetch(REMOTE_URL);
             
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             
-            const data = await response.json();
-            
-            // JSONBin wraps data in a 'record' property
-            const cards = data.record || data;
+            const cards = await response.json(); // Direct array, no wrapper
+            console.log('Remote data:', cards);
             
             renderCards(cards);
-            console.log('Loaded from remote:', cards);
             
         } catch (error) {
             console.error('Error loading remote data:', error);
