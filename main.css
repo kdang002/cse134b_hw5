@@ -714,25 +714,44 @@ form {
     padding: 0 !important; /* Force no padding */
 }
 
-
-
 .projects-grid project-card {
     width: calc(33.333% - 1.5rem);
     /* REMOVE margin-bottom - masonry handles spacing */
 }
 
-@media (max-width: 900px) {
-    .projects-grid project-card {
-        width: calc(50% - 1.5rem);
-    }
+
+/* Data Control Buttons */
+.data-controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    padding: 2rem 1rem;
+    margin: 0 auto;
+    max-width: 600px;
 }
 
-@media (max-width: 600px) {
-    .projects-grid project-card {
-        width: 100%;
-    }
+.data-btn {
+    flex: 1;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: 2px solid var(--nav-bg);
+    background: var(--nav-bg);
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
+.data-btn:hover {
+    background: transparent;
+    color: var(--nav-bg);
+    transform: translateY(-2px);
+}
+
+.data-btn:active {
+    transform: translateY(0);
+}
 
 /* ===========================
     MODERN CSS :has() and <pop-over>
@@ -888,6 +907,11 @@ footer {
         max-width: 350px;
     }
 
+    .data-controls {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
 }
 
 /* ======================================================
@@ -939,6 +963,10 @@ footer {
 
     .two-row-layout img {
         max-width: 80%;  /* Slightly constrained */
+    }
+    
+    .projects-grid project-card {
+        width: calc(50% - 1.5rem);
     }
 
 }
