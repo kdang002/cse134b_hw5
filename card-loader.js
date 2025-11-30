@@ -13,7 +13,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         return;
     }
     
-    // UPDATE THIS with YOUR GitHub username and repo name
+    // UPDATE THIS with GitHub username and repo name
     const REMOTE_URL = 'https://my-json-server.typicode.com/kdang002/cse134b-car-data/projects';
     
     let masonryInstance = null;
@@ -103,7 +103,6 @@ window.addEventListener('DOMContentLoaded', async () => {
             loadRemoteBtn.textContent = 'Loading...';
             loadRemoteBtn.disabled = true;
             
-            // NO API KEY NEEDED!
             const response = await fetch(REMOTE_URL);
             
             if (!response.ok) {
