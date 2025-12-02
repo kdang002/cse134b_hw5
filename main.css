@@ -131,6 +131,14 @@ html, body {
     animation: slideDown 0.7s ease-in-out;
 }
 
+h1 {
+    font-size: 4.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
 body {
     margin: 0;
     padding-top: env(safe-area-inset-top);
@@ -355,17 +363,9 @@ p > b, strong, em {
     transform: translateX(-50%);
     text-decoration: none;
     cursor: pointer;
-}
+    font-size: 2.5rem; 
 
-/* Desktop Logo */
-.logo {
-    color: white;
-    font-weight: bold;
-    -webkit-text-stroke: 1px black;
-    margin: 0;
-    font-size: 1.5rem;
 }
-
 
 /* ===========================
     WRAPPER & LAYOUTS
@@ -386,8 +386,9 @@ main {
         text-align: center;
     }
 
-    & > p {
+    & p {
         text-align: center;
+        font-size: 1.4rem;
     }
 }
 
@@ -495,10 +496,6 @@ fieldset > legend {
         object-position: center;
     }
 
-}
-
-#this-is-kiet {
-    align-content: center;
 }
 
 /* Buttons */
@@ -958,15 +955,6 @@ footer {
         padding: 0.5rem 1rem;
     }
 
-    .logo {
-        position: static; /* Remove absolute positioning */
-        transform: none; /* Remove transform */
-        order: 2;
-        font-size: 1.5rem;
-        text-align: center;
-        flex: 1;
-        padding: 0 0.5rem;
-    }
     .logo-link {
         position: static;
         transform: none;
@@ -975,6 +963,7 @@ footer {
         text-align: center;
         padding: 0;
         margin: 0 0.5rem;
+        font-size: 2.5rem; 
     }
 
 
@@ -1022,6 +1011,10 @@ footer {
 
     main {
         margin-top: 60px;
+
+        & p {
+            font-size: 1.2rem;
+        }
     }
 
     main h2 {
@@ -1057,6 +1050,11 @@ footer {
         padding: 1rem;
     }
 
+    h1 {
+        font-size: 4rem;
+        text-align: center;
+    }
+
 }
 
 /* ======================================================
@@ -1081,10 +1079,6 @@ footer {
         max-width: 100%;
         margin-inline: auto;
         gap: 1.5rem;
-    }
-
-    .logo {
-        font-size: 1.8rem;
     }
 
     main h2 {
@@ -1131,10 +1125,6 @@ footer {
         gap: 3rem;
     }
 
-    .logo {
-        font-size: 2rem;
-    }
-
     main {
         margin-top: 100px;
 
@@ -1143,7 +1133,7 @@ footer {
         }
 
         & > p {
-            font-size: 1.2rem;
+            font-size: 1.7rem;
         }
     }
 

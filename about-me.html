@@ -6,19 +6,18 @@
 		<meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-
 		<title>CSE 134B - VyDang</title>
+
         <link rel="stylesheet" href="main.css" media="screen">
+        <link rel="icon" type="image/x-icon" href="resources\images\vkd.ico">
 
         <!-- Importing Custom Porsche fonts directly from porsche.com -->
         <link rel="preconnect" href="https://cdn.ui.porsche.com" crossorigin>
         <link rel="dns-prefetch" href="https://cdn.ui.porsche.com" crossorigin>
-
+                
 	</head>
-    <!-- HEAD ENDS -->
 
-    <!-- BODY BEGINS -->
-	<body>
+    <body>
 		<header class="navbar">
             <!-- Pure CSS Hamburger Menu (Mobile Only) -->
             <input type="checkbox" id="menu-toggle" aria-label="Toggle mobile menu">
@@ -33,14 +32,13 @@
                 <button type="button" class="dropbtn">Menu</button>
                 <section class="dropdown-content">
                     <a href="index.html">Home</a>
+                    <a href="about-me.html">About Me</a>
+                    <a href="cars.html">CARS</a>
                     <a aria-disabled="true">More to Come :D</a>
-
                 </section>
             </nav>
 
-            <a href="index.html" class="logo-link">
-                <h1 class="logo">Vy Kiet Dang</h1>
-            </a>
+            <a href="index.html" class="logo-link">V K D</a>
 
             <!-- Dark Light Mode -->
             <section class="theme-switch-wrapper">
@@ -54,6 +52,8 @@
             <!-- Mobile Menu (Controlled by CSS) -->
             <nav class="mobile-menu">
                 <a href="index.html">Home</a>
+                <a href="about-me.html">About Me</a>
+                <a href="cars.html">CARS</a>
                 <a aria-disabled="true">More to Come :D</a>
             </nav>
 		</header>
@@ -108,7 +108,8 @@
             
             <hr>
 
-            <section class="wrapper">
+            <!-- Disabling the Review Box feature. -->
+            <!-- <section class="wrapper">
                 <div class="two-column-layout">
                 <span>
                     <article>
@@ -140,7 +141,6 @@
                                 <textarea id="opinion" name="opinion" rows="5" cols="40" placeholder="Share your thoughts..."></textarea>
                                 </p>
 
-                                <!-- Disable due to having no backend DB -->
                                 <p>
                                 <button type="submit" value="Submit">Submit</button>
                                 </p>
@@ -151,12 +151,7 @@
                 </span>
                 
                 </div>
-            </section>
-
-            
-            <button type="button" class="blow-up"
-            onclick="alert('MACHINE WILL SELF DESTRUCT IN 5 SECONDS.');">Try me UwU</button>
-            <hr>
+            </section> -->
             
             <!-- === Custom Element #2 usage === -->
             <hello-world>
