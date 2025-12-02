@@ -132,7 +132,7 @@ html, body {
 }
 
 h1 {
-    font-size: 4.5rem;
+    font-size: 5.5rem;
     text-align: center;
     margin-bottom: 1.5rem;
     font-weight: bold;
@@ -180,6 +180,7 @@ p > b, strong, em {
     padding: 0.75rem 1rem;
     box-sizing: border-box;
     gap: 1rem;
+    border-bottom: solid #92a156;
 }
 
 /* ===========================
@@ -400,6 +401,7 @@ fieldset > legend {
 
 
 .two-column-layout {
+    margin: auto;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     border: solid;
@@ -411,6 +413,15 @@ fieldset > legend {
     row-gap: 1rem;
     overflow: hidden;  /* Clips anything trying to escape */
     transition: transform 500ms ease;  /* Transition on element */
+    align-items: center;  /* Vertically center grid items */
+
+    & span {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
 
     & ol > li:first-child , 
       ul > li:first-child {
@@ -754,9 +765,19 @@ form {
 /* ===========================
     Crud preview localStorage
 =========================== */
+    .crud-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        margin: 0 auto;
+    }
+
     .manage-form {
         max-width: 600px;
         margin: 0 auto;
+        width: 100%;
     }
 
     .manage-list-container {
@@ -928,6 +949,53 @@ review-box:has(textarea:focus) {
 /* Disable the user from scrolling as a prank */
 body:has(#my-popover:popover-open) {
     overflow: hidden;
+}
+
+/* Contact Links - Styled Square Boxes */
+.contact-links {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+}
+
+.contact-links li {
+    list-style: none;
+}
+
+.contact-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-align: center;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.contact-links a:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.contact-links svg {
+    width: 48px;
+    height: 48px;
+    transition: transform 0.3s ease;
+}
+
+.contact-links a:hover svg {
+    transform: scale(1.1);
 }
 
 footer {
