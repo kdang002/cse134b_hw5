@@ -388,7 +388,7 @@ p > b, strong, em {
 
 main {
     padding: 1rem;
-    margin-top: 40px;
+    margin-top: 20px;
 
     & h2 {
         text-align: center;
@@ -397,6 +397,10 @@ main {
     & p {
         text-align: center;
         font-size: 1.4rem;
+    }
+
+    & a {
+        font-size: 1.5rem;
     }
 }
 
@@ -1299,7 +1303,7 @@ footer {
     }
 
     main {
-        margin-top: 60px;
+        margin-top: 20px;
 
         & p {
             font-size: 1.2rem;
@@ -1434,7 +1438,7 @@ footer {
     }
 
     main {
-        margin-top: 100px;
+        margin-top: 20px;
 
         & h2 {
             font-size: 2.5rem;
