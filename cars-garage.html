@@ -88,14 +88,14 @@
                         required 
                         placeholder="https://example.com/car.jpg or resources/cars/car.jpg">
                     
-                    <label for="opinion">Description</label>
+                    <label for="car-description">Description</label>
                     <textarea 
-                        id="opinion" 
-                        name="opinion" 
+                        id="car-description" 
+                        name="car-description" 
                         rows="4"
-                        maxlength="100"
-                        placeholder="Tell us about this car up to 100 characters"></textarea>
-                        <output class="info" id="comment-info">100 characters remaining</output>
+                        maxlength="50"
+                        placeholder="Tell us about this car up to 50 characters"></textarea>
+                        <output class="info" id="comment-info">50 characters remaining</output>
 
                     <label for="car-link">Learn More Link</label>
                     <input 
@@ -171,7 +171,7 @@
                     }
                 }
                 // Bind character counter listener
-                const comments = document.getElementById('opinion');
+                const comments = document.getElementById('car-description');
                 comments.addEventListener('input', handleCommentInput);
 
             });
