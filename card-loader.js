@@ -1,3 +1,7 @@
+// ----------------------------------------------------
+// Load localStorage and Load Remote JSON for card objects
+// Invoked in cars.html
+// ----------------------------------------------------
 window.addEventListener('DOMContentLoaded', async () => {
     console.log('Data loader script running...');
     
@@ -20,16 +24,16 @@ window.addEventListener('DOMContentLoaded', async () => {
     
     const localData = [
         {
-            title: "Lamboghini Aventador S",
-            img: "resources/cars/lambo-aventador-s.jpg",
-            description: "Batman's roller.",
-            link: "#"
+            title: "Toyota Supra Mk5",
+            img: "https://static1.topspeedimages.com/wordpress/wp-content/uploads/2023/06/supra.jpg",
+            description: "Technically a re-skinned BMW, uses the same engine, chasis, interiors, infortainment, etc. from a BMW Z4. Expensive and under-delivered.Generated via prepopulated localStorage.",
+            link: "https://www.toyota.com/grsupra/?msockid=3167109b7e8f66353c6202e47fe567cf"
         },
         {
-            title: "Aston Martin DBS",
-            img: "resources/cars/am-dbs.jpg",
-            description: "Performance Family SUV??!",
-            link: "#"
+            title: "Koenigsegg Gemera",
+            img: "https://www.supervettura.com/images/koenigsegg/gemera-gallery-5.jpg",
+            description: "A Family Saloon, but Hypercar. So now you can take your entire family of 4 on a roadtrip and still reach 400 km/h. Generated via prepopulated localStorage.",
+            link: "https://www.koenigsegg.com/model/regera"
         }
     ];
     
@@ -90,7 +94,7 @@ window.addEventListener('DOMContentLoaded', async () => {
                 const data = JSON.parse(storedData);
                 renderCards(data);
             } else {
-                alert('No local data found!');
+                alert('No local data found! Go to Garage Manager to add them.');
             }
         } catch (error) {
             console.error('Error loading local data:', error);
