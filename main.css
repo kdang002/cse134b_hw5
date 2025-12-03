@@ -4,6 +4,7 @@
     GLOBAL STYLES
 ====================================================== */
 :root {
+    --transition-theme: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
     --bg-color: beige;
     --text-color: black;
     --nav-bg: rgb(199, 199, 60);
@@ -19,7 +20,7 @@
     navigation: auto;
 }
 
-/* Dark mode overrides */
+/* Dark mode configurations */
 .dark {
     --bg-color: #2d2929;
     --text-color: #ffffff;
@@ -28,6 +29,12 @@
     --menu-hover: #333;
     --menu-active: #555;
 }
+
+/* Add smooth transitions to elements using CSS variables */
+body, nav, .menu, main, section {
+    transition: var(--transition-theme);
+}
+
 #theme-toggle {
     display: none; /* Hide the original button */
 }
@@ -59,7 +66,7 @@
     bottom: 0;
     background-color: #ccc;
     border-radius: 30px;
-    transition: background-color 0.3s ease;
+    transition: var(--transition-theme);
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
@@ -73,7 +80,7 @@
     bottom: 3px;
     background-color: white;
     border-radius: 50%;
-    transition: transform 0.3s ease, background-color 0.3s ease;
+    transition: var(--transition-theme);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -88,8 +95,7 @@
 
 .theme-switch input:checked + .slider::before {
     content: "🌙";
-    transform: translateX(30px);
-    transition: transform 0.7s ease, background-color 0.3s ease;
+    transform: translateX(30px) rotate(360deg);
 }
 
 /* Hover effect */
@@ -112,11 +118,11 @@
     display: none; /* Hidden by default, show on larger screens */
 }
 
-
 * {
     background-color: var(--bg-color);
     color: var(--text-color);
     font-family: 'Porsche Next', Arial, sans-serif;
+    transition: var(--transition-theme);
 }
 
 *, *::before, *::after {
@@ -181,6 +187,7 @@ p > b, strong, em {
     box-sizing: border-box;
     gap: 1rem;
     border-bottom: solid #92a156;
+    transition: var(--transition-theme);
 }
 
 /* ===========================
@@ -291,11 +298,12 @@ p > b, strong, em {
 .dropdown {
     position: relative;
     display: inline-block;
+            transition: var(--transition-theme);
+
 }
 
 .dropbtn {
-    background-color: color-mix(in srgb, rgb(199, 199, 60) 70%, white);
-    background-color: rgb(199, 199, 60); /* Fallback */
+    background-color: rgb(199, 199, 60);
     color: white;
     padding: 16px 24px;
     font-size: 16px;
@@ -303,6 +311,7 @@ p > b, strong, em {
     cursor: pointer;
     min-width: 44px;
     min-height: 44px;
+    transition: all 0.75s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .dropdown-content {
@@ -365,7 +374,6 @@ p > b, strong, em {
     text-decoration: none;
     cursor: pointer;
     font-size: 2.5rem; 
-
 }
 
 /* ===========================
@@ -414,6 +422,7 @@ fieldset > legend {
     overflow: hidden;  /* Clips anything trying to escape */
     transition: transform 500ms ease;  /* Transition on element */
     align-items: center;  /* Vertically center grid items */
+    transition: var(--transition-theme);
 
     & span {
         display: flex;
@@ -421,6 +430,7 @@ fieldset > legend {
         justify-content: center;
         align-items: center;
         text-align: center;
+
     }
 
     & ol > li:first-child , 
@@ -852,8 +862,6 @@ form {
         opacity: 0.8;
         overflow: hidden;
         text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
     }
 
     .car-actions {
@@ -965,14 +973,17 @@ body:has(#my-popover:popover-open) {
     list-style: none;
 }
 
+.contact-links svg{
+    fill: var(--text-color);
+}
+
 .contact-links a {
-    display: inline-flex;
+    display: block;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between; /* Changed from center */
     width: 120px;
     height: 120px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    color: var(--text-color); /* Use site text color */
     text-decoration: none;
     border-radius: 8px;
     font-weight: 600;
@@ -980,7 +991,19 @@ body:has(#my-popover:popover-open) {
     text-align: center;
     padding: 1rem;
     box-sizing: border-box;
+    border: solid var(--text-color);
+    border-radius: 3px;
+    transition: var(--transition-theme);
 }
+
+.contact-links a p {
+    display: block;
+    text-align: center;
+    margin: 0;
+    font-size: 1.25rem;
+
+}
+
 
 .contact-links a:hover {
     transform: translateY(-5px);
