@@ -88,13 +88,15 @@
                         required 
                         placeholder="https://example.com/car.jpg or resources/cars/car.jpg">
                     
-                    <label for="car-description">Description</label>
+                    <label for="opinion">Description</label>
                     <textarea 
-                        id="car-description" 
-                        name="description" 
+                        id="opinion" 
+                        name="opinion" 
                         rows="4"
-                        placeholder="Tell us about this car..."></textarea>
-                    
+                        maxlength="100"
+                        placeholder="Tell us about this car up to 100 characters"></textarea>
+                        <output class="info" id="comment-info">100 characters remaining</output>
+
                     <label for="car-link">Learn More Link</label>
                     <input 
                         type="url" 
@@ -142,6 +144,40 @@
 
         <!-- JAVA SCRIPT LINKED -->
         <script src="darkmode.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                // This function updates the character counter and warns near the limit
+                // @param {Event} e - Input event from the comments textarea
+                // @return {void}
+                function handleCommentInput(e) {
+                    const comments = e.target;
+                    const commentInfo = document.getElementById('comment-info');
+                    const maxLength = comments.getAttribute('maxlength');
+                    const remaining = maxLength - comments.value.length;
+
+                    commentInfo.textContent = `${remaining} characters remaining`;
+
+                    // Reset classes
+                    commentInfo.classList.remove('warn', 'error');
+                    comments.classList.remove('warn', 'error');
+
+                    // Apply warning or error styling near limit
+                    if (remaining <= 0) {
+                        commentInfo.classList.add('error');
+                        comments.classList.add('error');
+                        comments.setCustomValidity('You have reached the maximum character limit!');
+                    } else {
+                        comments.setCustomValidity('');
+                    }
+                }
+                // Bind character counter listener
+                const comments = document.getElementById('opinion');
+                comments.addEventListener('input', handleCommentInput);
+
+            });
+            
+        </script>
+
 
 		<!-- JS Disable fail safe, learned it the hard way from 110 -->
         <noscript>
