@@ -1,3 +1,7 @@
+// ----------------------------------------------------
+// Card object. Generated via JS and styled the shadow-DOM
+// Invoked in cars.html
+// ----------------------------------------------------
 window.addEventListener('DOMContentLoaded', () => {
 function cardStyles() {
     return `
@@ -24,6 +28,7 @@ function cardStyles() {
             display: flex;
             flex-direction: column;
             background: var(--card-bg);
+            border: 3px solid var(--text-color);
             border-radius: var(--card-border-radius);
             overflow: hidden;
             box-shadow: 0 4px 12px var(--card-shadow);
@@ -176,10 +181,10 @@ function cardStyles() {
             if (window.innerWidth > 600) {
                 if (!msnry) {
                     msnry = new Masonry(grid, {
-                        // use a CSS class selector so Masonry can reliably find items
-                        itemSelector: '.project-card',
+                        // use a tag selector to find custom elements
+                        itemSelector: 'project-card',
                         percentPosition: true,
-                        gutter: 24,
+                        gutter: 40,
                         horizontalOrder: true
                     });
                 }

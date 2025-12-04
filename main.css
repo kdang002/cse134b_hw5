@@ -742,13 +742,8 @@ form {
 
 .projects-grid project-card {
     width: calc(33.333% - 1.5rem);
-    margin: 0 !important; /* Force no margin */
-    padding: 0 !important; /* Force no padding */
-}
-
-.projects-grid project-card {
+    margin-bottom: 30px;   /* adds vertical spacing */
     width: calc(33.333% - 1.5rem);
-    /* REMOVE margin-bottom - masonry handles spacing */
 }
 
 
@@ -952,7 +947,7 @@ form {
 
 .car-item {
     display: grid;
-    grid-template-columns: 1fr 1fr auto;
+    grid-template-columns: 0.75fr 1fr auto;
     gap: 1rem;
     padding: 1rem;
     background-color: var(--bg-color);
@@ -977,11 +972,12 @@ form {
 .car-info h4 {
     color: var(--text-color);
     word-wrap: break-word;
+    font-size: 2rem;
 }
 
 .car-info p {
     margin: 0;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     color: var(--text-color);
     opacity: 0.8;
     overflow: hidden;
@@ -1084,11 +1080,11 @@ form {
     }
 
     .car-info h4 {
-        font-size: 1rem;
+        font-size: 1.5rem;
     }
 
     .car-info p {
-        font-size: 0.85rem;
+        font-size: 0.95rem;
     }
 
     .car-actions {
@@ -1252,6 +1248,7 @@ footer {
         text-decoration: underline;
         color: #2563eb;
     }   z-index: 1;
+
 }
 
 /* ======================================================
