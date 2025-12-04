@@ -11,9 +11,21 @@
         <link rel="stylesheet" href="main.css" media="screen">
         <link rel="icon" type="image/x-icon" href="resources\images\vkd.ico">
 
-        <!-- Importing Custom Porsche fonts directly from porsche.com -->
-        <link rel="preconnect" href="https://cdn.ui.porsche.com" crossorigin>
-        <link rel="dns-prefetch" href="https://cdn.ui.porsche.com" crossorigin>
+    <!-- Load Porsche font asynchronously -->
+    <link 
+        rel="preload" 
+        as="style" 
+        href="https://cdn.ui.porsche.com/porsche-design-system/styles/font-face.7076ba0.css"
+        onload="this.onload=null;this.rel='stylesheet'">
+    
+    <noscript>
+        <link rel="stylesheet" href="https://cdn.ui.porsche.com/porsche-design-system/styles/font-face.7076ba0.css">
+    </noscript>
+    
+    <!-- Your main CSS -->
+    <link rel="stylesheet" href="main.css" media="screen">
+    
+    <link rel="icon" type="image/x-icon" href="resources/images/vkd.ico">
                 
 	</head>
 
@@ -65,17 +77,13 @@
                 <div class="two-column-layout">                    
                     <span>
                         <h1> VY KIET <br> DANG </h1>
-                        <!-- <button popovertarget="my-popover" class="blow-up"> Click this Popover </button>
-                        <div id="my-popover" popover>
-                            <p><strong>YOUR DEVICE HAS BEEN COMPROMISED AND WILL SELF DESTRUCT IN 5 SECONDS.</strong></p>
-                        </div> -->
                         <h2>UC San Diego <br> Computer Science</h2>
                     </span>
 
                     <figure>
                         <picture> 
-                            <source srcset ="resources\images\Kiet_Pink_600.jpg 600w, resources\images\Kiet_Lake_1024.jpg 1024w" media="(min-width: 1025px)" alt="Kiet the J*bless">
-                            <img    width="600" alt="Pink Kiet" src="resources\images\Kiet_Pink_600.jpg">
+                            <source srcset ="resources\images\Kiet_Pink_600.jpg 600w, resources\images\Kiet_Lake_1024.jpg 1024w" media="(min-width: 1025px)">
+                            <img    height="800" width="600" alt="Pink Kiet" src="resources\images\Kiet_Pink_600.jpg">
                         </picture>
                         <figcaption>Kiet at Jiu Zhai Gou</figcaption>
                     </figure>
