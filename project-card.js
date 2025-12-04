@@ -144,21 +144,56 @@ function cardStyles() {
             const description = this.getAttribute('description') || 'Project description goes here.';
             const link = this.getAttribute('link') || '#';
 
-            this.shadowRoot.innerHTML = `
-                <style>${cardStyles()}</style>
+            // DO NO CREATE ELEMENT WITH USER'S INPUT inside of innerHTML, which is vulnerable to XSS or any kind of injections
+            this.shadowRoot.innerHTML = ``;
+        
+            // Create style
+            const style = document.createElement('style');
+            style.textContent = cardStyles();
 
-                <div class="card">
-                    
+            // Create card
+            const card = document.createElement('div');
+            card.className = 'card';
 
-                    <a href="${link}">
-                        <h2>${title}</h2>
-                        <picture>
-                            <img src="${imgSrc}" alt="${title}">
-                        </picture>                    
-                        <p>${description}</p>
-                    </a>
-                </div>
-            `;
+            // Create link wrapper (safe)
+            const a = document.createElement('a');
+
+            // Only set link if valid; otherwise disable link
+            try {
+                if (link && new URL(link)) {
+                    a.setAttribute('href', link);
+                }
+            } catch {
+                a.setAttribute('href', '#');
+            }
+
+            // Title (safe)
+            const h2 = document.createElement('h2');
+            h2.textContent = title;
+
+            // Image (safe)
+            const picture = document.createElement('picture');
+            const img = document.createElement('img');
+            img.setAttribute('src', imgSrc || ''); // blank allowed
+            img.setAttribute('alt', title || '');
+            img.onerror = () => {
+                img.src = 'https://via.placeholder.com/350x200?text=No+Image';
+            };
+            picture.appendChild(img);
+
+            // Description (safe)
+            const p = document.createElement('p');
+            p.textContent = description;
+
+            // Assemble safely
+            a.appendChild(h2);
+            a.appendChild(picture);
+            a.appendChild(p);
+            card.appendChild(a);
+
+            // Append everything into shadow DOM
+            this.shadowRoot.appendChild(style);
+            this.shadowRoot.appendChild(card);
         }
     }
 

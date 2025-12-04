@@ -1,4 +1,5 @@
-# Kiet Vy Dang's Personal Website
+# Kiet Vy Dang's Personal Website:
+## Here is a link to my site: https://vydang-cse134b-hw5.netlify.app/
 
 - This is my personal website that I created to using vanilla HTML,CSS, Javascript, talks about who I am, educations, side projects, and the way to contact me.
 - This site also includes a Cars Collection site, which I will be using it to posts my car spottings as I'm a huge car guy.

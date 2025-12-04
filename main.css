@@ -207,7 +207,7 @@ p > b, strong, em {
     flex-direction: column;
     cursor: pointer;
     padding: 10px;
-    background-color: rgb(199, 199, 60);
+    background-color: var(--text-color);
     border: none;
     border-radius: 5px;
     min-width: 44px;
@@ -221,7 +221,7 @@ p > b, strong, em {
 .hamburger-label span {
     width: 25px;
     height: 3px;
-    background-color: white;
+    background-color: var(--bg-color);
     transition: all 0.3s ease;
     display: block;
 }
@@ -246,7 +246,7 @@ p > b, strong, em {
     top: 60px;
     left: 0;
     width: 100%;
-    background-color: #f1f1f1 !important;
+    background-color: var(--bg-color);
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 999;
 }
@@ -258,7 +258,7 @@ p > b, strong, em {
 }
 
 .mobile-menu a {
-    color: black; /* Force dark text */
+    color: var(--text-color); /* Force dark text */
     padding: 20px 16px;
     text-decoration: none;
     display: block;
@@ -269,32 +269,13 @@ p > b, strong, em {
 }
 
 .mobile-menu a:hover {
-    background-color: #ddd !important;
+    background-color: var(--bg-color);
 }
 
 .mobile-menu a:active {
-    background-color: #ccc !important;
+    background-color: var(--bg-color);
 }
 
-/* Dark Mode - Override for mobile menu */
-.dark .mobile-menu {
-    background-color: #2a2a2a !important; /* Dark mobile menu background */
-    border-top: 1px solid #444;
-}
-
-.dark .mobile-menu a {
-    color: #e5e5e5 !important; /* Light text in dark mode */
-    background-color: #877943 !important;
-    border-bottom: 1px solid #444;
-}
-
-.dark .mobile-menu a:hover {
-    background-color: #3a3a3a !important; /* Slightly lighter on hover */
-}
-
-.dark .mobile-menu a:active {
-    background-color: #4a4a4a !important; /* Even lighter when active */
-}
 
 /* Desktop Menu */
 .dropdown {
@@ -304,28 +285,29 @@ p > b, strong, em {
 }
 
 .dropbtn {
-    background-color: rgb(199, 199, 60);
-    color: white;
+    background-color: var(--text-color);
+    color: var(--bg-color);
     padding: 16px 24px;
-    font-size: 16px;
+    font-size: 1.32rem;
     border: none;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
     cursor: pointer;
     min-width: 44px;
     min-height: 44px;
-    transition: all 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: var(--transition-theme);
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f1f1f1 !important;
+    background-color: #f1f1f1;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
 
 .dropdown-content a {
-    color: black !important;
     padding: 16px;
     text-decoration: none;
     display: block;
@@ -333,11 +315,7 @@ p > b, strong, em {
 }
 
 .dropdown-content a:hover {
-    background-color: #ddd !important;
-}
-
-.dropdown-content a:active {
-    background-color: #ccc !important;
+    background-color: #b0b5bc;
 }
 
 .dropdown:hover .dropdown-content {
@@ -345,26 +323,18 @@ p > b, strong, em {
 }
 
 .dropdown:hover .dropbtn {
-    background-color: #d4c27a !important;
-}
-
-/* Dark Mode - Override for dropdown */
-.dark .dropdown-content {
-    background-color: #2a2a2a !important; /* Dark dropdown background */
-    border: 1px solid #444;
+    background-color: rgb(157, 157, 157);
+    color: var(--bg-color)
 }
 
 .dark .dropdown-content a {
-    color: #e5e5e5 !important; /* Light text in dark mode */
-    background-color: #877943 !important;
+    color: var(--bg-color); /* Light text in dark mode */
+    background-color: var(--text-color);
+    border-bottom: 1px solid black;
 }
 
 .dark .dropdown-content a:hover {
-    background-color: #3a3a3a !important; /* Slightly lighter on hover */
-}
-
-.dark .dropdown-content a:active {
-    background-color: #4a4a4a !important; /* Even lighter when active */
+    background-color: #c0c0c0; /* Slightly lighter on hover */
 }
 
 /* LOGO */
@@ -1140,15 +1110,6 @@ form {
 /* ===========================
     MODERN CSS :has() and <pop-over>
 =========================== */
-/* Select the .dropdown that specifically 
-    :has .dropdown-content:hover and .dropbtn.
-    Function: highlight them whenever hovered over the dropdown content */
-.dropdown:has(.dropdown-content:hover) .dropbtn {
-    background-color: color(srgb 98.0% 72.2% 30.2%);
-    background-color: #c7b84d;
-    transition: background-color 0.3s ease;
-}
-
 /* Select the <review-box> that specifically 
     :has textarea:focus.
     Function: adds a green glow effect when the <textarea> inside it is focused */

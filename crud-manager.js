@@ -47,38 +47,83 @@ window.addEventListener('DOMContentLoaded', () => {
     // Render the list of cars
     function renderCarsList() {
         const cars = getCars();
-        
+
+        carsList.innerHTML = ""; // Clear safely
+
         if (cars.length === 0) {
-            carsList.innerHTML = `
-                <div class="empty-state">
-                    <p>No cars in storage. Add your first car above! 🚗</p>
-                </div>
-            `;
+            const emptyDiv = document.createElement("div");
+            emptyDiv.className = "empty-state";
+
+            const msg = document.createElement("p");
+            msg.textContent = "No cars in storage. Add your first car above! 🚗";
+
+            emptyDiv.appendChild(msg);
+            carsList.appendChild(emptyDiv);
             return;
         }
-        
-        carsList.innerHTML = cars.map((car, index) => `
-            <div class="car-item">
-                <img src="${car.img}" alt="${car.title}" onerror="this.src='https://via.placeholder.com/100x70?text=No+Image'">
-                <div class="car-info">
-                    <h4>${car.title}</h4>
-                    <p>${car.description.substring(0, 100)}${car.description.length > 100 ? '...' : ''}</p>
-                </div>
-                <div class="car-actions">
-                    <button class="btn-edit" data-index="${index}">Edit</button>
-                    <button class="btn-delete" data-index="${index}">Delete</button>
-                </div>
-            </div>
-        `).join('');
-        
-        // Add event listeners to edit/delete buttons
+
+        cars.forEach((car, index) => {
+            const item = document.createElement("div");
+            item.className = "car-item";
+
+            // IMAGE (safe)
+            const img = document.createElement("img");
+            img.setAttribute("src", car.img);
+            img.setAttribute("alt", car.title);
+            img.onerror = () => {
+                img.src = "https://via.placeholder.com/100x70?text=No+Image";
+            };
+
+            // INFO WRAPPER
+            const info = document.createElement("div");
+            info.className = "car-info";
+
+            const title = document.createElement("h4");
+            title.textContent = car.title;
+
+            const shortDesc = document.createElement("p");
+            shortDesc.textContent = 
+                car.description.length > 100
+                ? car.description.substring(0, 100) + "..."
+                : car.description;
+
+            info.appendChild(title);
+            info.appendChild(shortDesc);
+
+            // ACTIONS
+            const actions = document.createElement("div");
+            actions.className = "car-actions";
+
+            const editBtn = document.createElement("button");
+            editBtn.className = "btn-edit";
+            editBtn.textContent = "Edit";
+            editBtn.dataset.index = index;
+
+            const deleteBtn = document.createElement("button");
+            deleteBtn.className = "btn-delete";
+            deleteBtn.textContent = "Delete";
+            deleteBtn.dataset.index = index;
+
+            actions.appendChild(editBtn);
+            actions.appendChild(deleteBtn);
+
+            // Build full item
+            item.appendChild(img);
+            item.appendChild(info);
+            item.appendChild(actions);
+
+            // Add to list
+            carsList.appendChild(item);
+        });
+
+        // Add event listeners safely
         document.querySelectorAll('.btn-edit').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const index = parseInt(e.target.dataset.index);
                 editCar(index);
             });
         });
-        
+
         document.querySelectorAll('.btn-delete').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const index = parseInt(e.target.dataset.index);
@@ -167,7 +212,7 @@ window.addEventListener('DOMContentLoaded', () => {
             title: titleInput.value.trim(),
             img: imgInput.value.trim(),
             description: descInput.value.trim(),
-            link: linkInput.value.trim() || '#'
+            link: linkInput.value.trim() || ''
         };
         
         if (editingIndex >= 0) {
